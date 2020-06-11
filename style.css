@@ -15,6 +15,8 @@ body {
 .content-wrap {
     justify-content: center;
     align-items: center;
+    padding: 0;
+    margin: 500;
 }
 
 .container{
@@ -24,7 +26,10 @@ body {
     border-radius: 5px;
     padding: 10px;
     margin-top: 200px;
+    margin-right: ;
     box-shadow: 0 0 10px 2px;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
@@ -66,3 +71,7 @@ body {
 .hide {
     display: none;
 }
+
+.nav {
+    display: inline-block;
+    float: none;

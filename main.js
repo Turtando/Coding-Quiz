@@ -5,6 +5,8 @@ const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
 var answerResponse = document.getElementById("answer-response");
 var countdownEl = document.getElementById("countdown");
+// var counter = 10;
+// var questionsCounter = 0;
 
 // We need the questions to be constantly shuffled, 
 // so they won't show up in the same order.
@@ -131,7 +133,7 @@ function selectAnswer(i) {
         currentQuestionIndex++
         setNextQuestion()
     } else {
-        startButton.innerText = "Restart"
+        startButton.innerText = "Submit Score!"
         startButton.classList.remove("hide")
     }
 
@@ -153,7 +155,7 @@ function setStatusClass(element, correct) {
 }
 
 // function for timer
-const startingMinutes = 1;
+const startingMinutes = 2;
 let time = startingMinutes * 60;
 
 function updateCountdown() {
@@ -165,4 +167,5 @@ function updateCountdown() {
         countdownEl.innerHTML = "GAME OVER!"
     }
 }
+
 setInterval(updateCountdown, 1000);
