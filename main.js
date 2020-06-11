@@ -6,9 +6,9 @@ const answerButtonsEl = document.getElementById("answer-buttons");
 const submitEl = document.getElementById("submit-score")
 var answerResponse = document.getElementById("answer-response");
 var countdownEl = document.getElementById("countdown");
-var highscores = [{initials: "ET" , score: 0}];
-let countRightAnswers = 0
-
+var highscores = [{initials: "" , score: 0}];
+let countRightAnswers = 0;
+document.getElementById("right-answers").innerHTML = countRightAnswers;
 // var counter = 10;
 // var questionsCounter = 0;
 
@@ -73,6 +73,7 @@ startButton.addEventListener("click", startGame);
 
 
 // We need a function to prompt the start button into beginning the quiz
+// This function also begins the games Score counter at 0.
 function startGame() {
     console.log("You started the game!");
     startButton.classList.add("hide");
@@ -100,8 +101,8 @@ function showQuestion(question) {
         // adding a dataset attribute of correct for the right answers
         if (answer.correct) {
             button.dataset.correct = answer.correct
-        }
-
+        } 
+      
         // add select button to events listener and add to button element
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
@@ -138,13 +139,17 @@ function selectAnswer(i) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         currentQuestionIndex++
         setNextQuestion()
-    } if (selectedButton.dataset = correct) {
+    }
+    else {
+        questionContainerEl.classList.add("hide")
+        submitEl.classList.remove("hide")
+    } 
+    if (selectedButton.dataset = correct) {
         countRightAnswers++;
     }
     else {
         questionContainerEl.classList.add("hide")
         submitEl.classList.remove("hide")
-        
     }
     document.getElementById('right-answers').innerHTML = countRightAnswers;
 }
@@ -153,7 +158,10 @@ function selectAnswer(i) {
 
 function submitScore() {
     document.getElementById("fname").value
-    // alert(document.getElementById("fname").value)
+    countRightAnswers.value
+    alert(document.getElementById("fname").value)
+    alert(countRightAnswers)
+    location.replace("highscores.html");
     
 }
 
@@ -184,6 +192,8 @@ function updateCountdown() {
 
     if (time < 0) {
         countdownEl.innerHTML = "GAME OVER!"
+        questionContainerEl.classList.add("hide")
+        submitEl.classList.remove("hide")
     }
 }
 
