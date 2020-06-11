@@ -27,12 +27,23 @@
                     <button class="btn">Answer 1</button>
                     <button class="btn">Answer 2</button>
                     <button class="btn">Answer 3</button>
-                    <button class="btn">Answer 4</button>
+                    <button class="btn">Answer 4</button>                
                 </div>
+                <div id="answer-response"></div>
+            </div>
+            <div id="submit-score" class="hide">
+                <h2>All Done!</h2>
+
+                <form>
+                    <label for="fname">Enter initials:</label><br>
+                    <input type="text" id="fname" name="fname" value=""><br><br>
+                    <button onclick="submitScore()" id="submit-initials">Submit</button>
+                    <P>SCORE:</P><span id="right-answers"></span>
+                </form>
             </div>
             <div class="controls">
                 <button id="start-btn" class="start-btn btn">Begin!</button>
-                <div id="answer-response"></div>
+                
             </div>
         </div>
     </div>

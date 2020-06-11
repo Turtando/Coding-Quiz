@@ -3,8 +3,12 @@ const startButton = document.getElementById("start-btn");
 const questionContainerEl = document.getElementById("question-container");
 const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
+const submitEl = document.getElementById("submit-score")
 var answerResponse = document.getElementById("answer-response");
 var countdownEl = document.getElementById("countdown");
+var highscores = [{initials: "ET" , score: 0}];
+let countRightAnswers = 0
+
 // var counter = 10;
 // var questionsCounter = 0;
 
@@ -67,6 +71,7 @@ const questions = [
 // Our start and next event listeners
 startButton.addEventListener("click", startGame);
 
+
 // We need a function to prompt the start button into beginning the quiz
 function startGame() {
     console.log("You started the game!");
@@ -74,6 +79,7 @@ function startGame() {
     // set shuffled questions to the array
     shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
+    countRightAnswers = 0;
     questionContainerEl.classList.remove("hide");
     setNextQuestion();
 }
@@ -132,12 +138,25 @@ function selectAnswer(i) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         currentQuestionIndex++
         setNextQuestion()
-    } else {
-        startButton.innerText = "Submit Score!"
-        startButton.classList.remove("hide")
+    } if (selectedButton.dataset = correct) {
+        countRightAnswers++;
     }
-
+    else {
+        questionContainerEl.classList.add("hide")
+        submitEl.classList.remove("hide")
+        
+    }
+    document.getElementById('right-answers').innerHTML = countRightAnswers;
 }
+
+// submit button function
+
+function submitScore() {
+    document.getElementById("fname").value
+    // alert(document.getElementById("fname").value)
+    
+}
+
 
 // if the correct answer is selected, this will add the element of correct prompting the next function
 function setStatusClass(element, correct) {
