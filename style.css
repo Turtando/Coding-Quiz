@@ -27,6 +27,10 @@ body {
     box-shadow: 0 0 10px 2px;
 }
 
+.header {
+    justify-content: center;
+}
+
 .btn:hover {
     border-color: black;
 }

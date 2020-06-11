@@ -4,7 +4,8 @@ const questionContainerEl = document.getElementById("question-container");
 const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
 var answerResponse = document.getElementById("answer-response");
-var clock = 100;
+var countdownEl = document.getElementById("countdown");
+
 // We need the questions to be constantly shuffled, 
 // so they won't show up in the same order.
 
@@ -17,46 +18,46 @@ const questions = [
     {
         question: "Commonly used Data types DO NOT include:",
         answers: [
-            {text: "strings", correct: false},
-            {text: "booleans", correct: true},
-            {text: "alerts", correct: false},
-            {text: "integers", correct: false}
+            { text: "strings", correct: false },
+            { text: "booleans", correct: true },
+            { text: "alerts", correct: false },
+            { text: "integers", correct: false }
         ]
     },
     {
         question: "The condition in an if/else statement is enclosed within ____",
         answers: [
-            {text: "quotes", correct: false},
-            {text: "parentheses", correct: false},
-            {text: "curly brackets", correct: true},
-            {text: "square brackets", correct: false}
+            { text: "quotes", correct: false },
+            { text: "parentheses", correct: false },
+            { text: "curly brackets", correct: true },
+            { text: "square brackets", correct: false }
         ]
     },
     {
         question: "Arrays in JavaScript can be used to store:",
         answers: [
-            {text: "numbers and strings", correct: false},
-            {text: "other arrays", correct: false},
-            {text: "booleans", correct: false},
-            {text: "all of the above", correct: true}
+            { text: "numbers and strings", correct: false },
+            { text: "other arrays", correct: false },
+            { text: "booleans", correct: false },
+            { text: "all of the above", correct: true }
         ]
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: [
-            {text: "javaScript", correct: false},
-            {text: "terminal/bash", correct: false},
-            {text: "for loops", correct: false},
-            {text: "console.log", correct: true}
+            { text: "javaScript", correct: false },
+            { text: "terminal/bash", correct: false },
+            { text: "for loops", correct: false },
+            { text: "console.log", correct: true }
         ]
     },
     {
         question: "String values must be enclosed within _____ when being assigned to variables.",
         answers: [
-            {text: "commas", correct: false},
-            {text: "curly brackets", correct: false},
-            {text: "quotes", correct: true},
-            {text: "parentheses", correct: false}
+            { text: "commas", correct: false },
+            { text: "curly brackets", correct: false },
+            { text: "quotes", correct: true },
+            { text: "parentheses", correct: false }
         ]
     }
 
@@ -69,7 +70,7 @@ function startGame() {
     console.log("You started the game!");
     startButton.classList.add("hide");
     // set shuffled questions to the array
-    shuffledQuestions = questions.sort(() => Math.random() -.5);
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
     currentQuestionIndex = 0;
     questionContainerEl.classList.remove("hide");
     setNextQuestion();
@@ -91,17 +92,17 @@ function showQuestion(question) {
         // adding a dataset attribute of correct for the right answers
         if (answer.correct) {
             button.dataset.correct = answer.correct
-        } 
-        
+        }
+
         // add select button to events listener and add to button element
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
         console.log(button)
-        })
+    })
 }
 // we must set a reset function so that we reset the content on the quiz for the initial quiz
 function resetState() {
-   
+
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild)
     }
@@ -114,13 +115,13 @@ function selectAnswer(i) {
     var correct = selectedButton.dataset.correct
     setStatusClass(document.body, correct)
 
-    
+
     if (correct) {
         answerResponse.innerHTML = "That is correct!"
     } else {
         answerResponse.innerHTML = "That is wrong!"
     }
-    
+
     // loop through our other buttons using forEach
     Array.from(answerButtonsEl.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
@@ -133,7 +134,7 @@ function selectAnswer(i) {
         startButton.innerText = "Restart"
         startButton.classList.remove("hide")
     }
-    
+
 }
 
 // if the correct answer is selected, this will add the element of correct prompting the next function
@@ -144,18 +145,24 @@ function setStatusClass(element, correct) {
     } else {
         element.classList.add("wrong")
     }
-// we are then clearing the status of the classes
-function clearStatusClass(element) {
+    // we are then clearing the status of the classes
+    function clearStatusClass(element) {
         element.classList.remove("correct")
         element.classList.remove("wrong")
     }
-
 }
 
 // function for timer
-function timer() {
-    clock = clock -1;
-    if (clock < 100) {
-        timer.innerHTML = clock
+const startingMinutes = 1;
+let time = startingMinutes * 60;
+
+function updateCountdown() {
+    let seconds = time;
+    countdownEl.innerHTML = seconds;
+    time--;
+
+    if (time < 0) {
+        countdownEl.innerHTML = "GAME OVER!"
     }
 }
+setInterval(updateCountdown, 1000);
