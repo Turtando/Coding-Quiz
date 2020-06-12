@@ -24,6 +24,7 @@
             <div id="form">
                 <div id="HighScores">
                     <h3>List of Highscores</h3>
+                    <ol id="scorelist"></ol>
                 </div>
             </div>
         </div>
@@ -33,7 +34,24 @@
         <a href="https://github.com/Turtando" class="text-dark">Github</a>
         <a href="https://www.linkedin.com/in/christopher-turton-a0002670/" class="text-dark">LinkedIn</a>
     </footer>
+    <script>
+        var list = []
+        for (var i = 0; i < localStorage.length; i++) {
+        list.push({name:"", score:""}) 
+        var key = localStorage.key(i) 
+        var value = localStorage.getItem(key) 
+        list[i].name = key;
+        list[i].score = value;
+        }
+        
+        for (var i = 0; i < list.length; i++) {
+        var newItem = document.createElement("li");
+        newItem.textContent = list[i].name + " " + list [i].score;
+        document.getElementById("scorelist").appendChild(newItem);
+        }
 
+
+    </script>
 </body>
 
 </html>

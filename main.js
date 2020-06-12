@@ -4,14 +4,15 @@ const questionContainerEl = document.getElementById("question-container");
 const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
 const submitEl = document.getElementById("submit-score")
+const highScores = JSON.parse(localStorage.getItem("highScores"))
+console.log(highScores);
 var answerResponse = document.getElementById("answer-response");
 var countdownEl = document.getElementById("countdown");
-var highscores = [{initials: "" , score: 0}];
 let countRightAnswers = 0;
+const startingMinutes = 2;
+let time = startingMinutes * 60;
+var stopwatch;
 document.getElementById("right-answers").innerHTML = countRightAnswers;
-// var counter = 10;
-// var questionsCounter = 0;
-
 // We need the questions to be constantly shuffled, 
 // so they won't show up in the same order.
 
@@ -72,10 +73,24 @@ const questions = [
 startButton.addEventListener("click", startGame);
 
 
+
 // We need a function to prompt the start button into beginning the quiz
 // This function also begins the games Score counter at 0.
 function startGame() {
     console.log("You started the game!");
+    stopwatch = setInterval (function(){
+        if ( time >= 0 ){
+            countdownEl.innerHTML = time;
+        time--;
+        }    
+        else {
+            clearInterval(stopwatch)
+            countdownEl.innerHTML = "GAME OVER!"
+            questionContainerEl.classList.add("hide")
+            submitEl.classList.remove("hide")
+        }
+    }, 1000);
+
     startButton.classList.add("hide");
     // set shuffled questions to the array
     shuffledQuestions = questions.sort(() => Math.random() - .5);
@@ -83,6 +98,7 @@ function startGame() {
     countRightAnswers = 0;
     questionContainerEl.classList.remove("hide");
     setNextQuestion();
+    
 }
 // This function will prompt the user to the next question event
 function setNextQuestion() {
@@ -143,13 +159,14 @@ function selectAnswer(i) {
     else {
         questionContainerEl.classList.add("hide")
         submitEl.classList.remove("hide")
+        clearInterval(stopwatch)
     } 
     if (selectedButton.dataset = correct) {
         countRightAnswers++;
     }
     else {
-        questionContainerEl.classList.add("hide")
-        submitEl.classList.remove("hide")
+        time -= 20;
+        
     }
     document.getElementById('right-answers').innerHTML = countRightAnswers;
 }
@@ -157,12 +174,10 @@ function selectAnswer(i) {
 // submit button function
 
 function submitScore() {
-    document.getElementById("fname").value
-    countRightAnswers.value
-    alert(document.getElementById("fname").value)
-    alert(countRightAnswers)
-    location.replace("highscores.html");
-    
+    var username = document.getElementById("fname").value
+    // countRightAnswers.value
+    localStorage.setItem(username, time);
+    // window.location.replace(href ="./highscores.html")
 }
 
 
@@ -181,20 +196,8 @@ function setStatusClass(element, correct) {
     }
 }
 
+
+
 // function for timer
-const startingMinutes = 2;
-let time = startingMinutes * 60;
 
-function updateCountdown() {
-    let seconds = time;
-    countdownEl.innerHTML = seconds;
-    time--;
 
-    if (time < 0) {
-        countdownEl.innerHTML = "GAME OVER!"
-        questionContainerEl.classList.add("hide")
-        submitEl.classList.remove("hide")
-    }
-}
-
-setInterval(updateCountdown, 1000);
