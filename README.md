@@ -14,5 +14,5 @@ Thank you,
 Chris Turton
 
 ![](mycodingquiz.gif)
-https://github.com/Turtando/Coding-Quiz
+https://turtando.github.io/Coding-Quiz/
 https://github.com/Turtando?tab=repositories
