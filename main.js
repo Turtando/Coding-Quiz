@@ -5,7 +5,6 @@ const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
 const submitEl = document.getElementById("submit-score")
 const highScores = JSON.parse(localStorage.getItem("highScores"))
-console.log(highScores);
 var answerResponse = document.getElementById("answer-response");
 var countdownEl = document.getElementById("countdown");
 let countRightAnswers = 0;
@@ -198,6 +197,6 @@ function setStatusClass(element, correct) {
 
 
 
-// function for timer
+
 
 
