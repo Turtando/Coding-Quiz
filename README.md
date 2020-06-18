@@ -13,6 +13,6 @@ Primarily focusing on the basics of DOM manipulation and Web API In this applica
 Thank you,
 Chris Turton
 
-![](mycodingquiz.gif)
+![](./Assets/mycodingquiz.gif)
 https://turtando.github.io/Coding-Quiz/
 https://github.com/Turtando?tab=repositories
