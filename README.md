@@ -23,7 +23,7 @@ Answer the questions correctly before the timer runs out!
 
 # Usage
 
-github.com/Turtando/Coding-Quiz
+https://turtando.github.io/Coding-Quiz/
 
 
 # License
